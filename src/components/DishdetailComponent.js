@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { baseUrl } from '../shared/baseUrl'
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem, Modal,ModalHeader,
     ModalBody, Label,Button } from 'reactstrap';
@@ -116,7 +116,7 @@ class CommentForm extends Component{
 function RenderDish({dish}){
         return(
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                   <CardTitle><span className="font-weight-bold">{dish.name}</span></CardTitle>
                   <CardText>{dish.description}</CardText>
