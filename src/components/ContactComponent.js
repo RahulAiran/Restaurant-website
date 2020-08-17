@@ -4,6 +4,11 @@ import { Breadcrumb, BreadcrumbItem , Button  , Label, Row , Col  } from 'reacts
 import {Link} from 'react-router-dom';
 import { Control , Form , Errors, actions} from 'react-redux-form';
 
+import { baseUrl } from '../shared/baseUrl'
+
+import {Loading} from './LoadingComponent';
+import { FadeTransform , Fade , Stagger } from 'react-animation-components';
+
 const required=(val)=> val && val.length;
 const maxLength=(len) => (val) => !(val) || (val.length <= len)
 const minLength=(len) => (val) => (val) && (val.length >= len)
@@ -15,13 +20,31 @@ class Contact extends Component {
 
     constructor(props){
         super(props);
+          this.state = {
+            firstname: '',
+            lastname: '',
+            telnum: '',
+            email: '',
+            agree: false,
+            contactType: 'Tel.',
+            message: '',
+            touched: {
+                firstname: false,
+                lastname: false,
+                telnum: false,
+                email: false
+            }
+
+        }
 
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
 handleSubmit(values){
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+  console.log("Current State is: " + JSON.stringify(values));
+  //  alert("Current State is: " + JSON.stringify(values));
+
+    this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
     this.props.resetFeedbackForm();
 
 }
